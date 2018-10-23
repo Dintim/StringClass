@@ -117,3 +117,25 @@ void string_::erase(int position, int cnt)
 	this->~string_();
 	this->setString(tmp);
 }
+
+string_ string_::operator+=(const string_ & obj)
+{	
+	if ((this->str==nullptr && obj.str == nullptr) || (this->str!=nullptr && obj.str==nullptr)) 
+		return *this;
+	if (this->str == nullptr && obj.str != nullptr) {
+		this->setString(obj.str);
+		return *this;
+	}
+	else {
+		char* tmp = new char[this->length + obj.length + 1];
+		int k = 0;
+		for (int i = 0; i < this->length; i++)
+			tmp[k++] = this->str[i];
+		for (int i = 0; i < obj.length; i++)
+			tmp[k++] = obj.str[i];
+		tmp[this->length + obj.length] = '\0';
+		this->~string_();
+		this->setString(tmp);
+		return *this;
+	}	
+}

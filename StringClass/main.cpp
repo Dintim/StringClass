@@ -1,14 +1,17 @@
 #include "string_.h"
+//#include <stdlib.h>
+//#include <stdlib.h>
+//#include <cstring>
 
 
 void main()
 {
+	
+
 	string_ s("hello");
-	s.insert(2, "world");
+	string_ d(" world");
+	s += d;
 	s.print();
-	cout << endl;
-	s.erase(3, 4);
-	s.print();	
 
 	system("pause");
 }

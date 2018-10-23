@@ -19,4 +19,5 @@ public:
 	void clear();
 	void insert(int position, const char * str);
 	void erase(int position, int cnt);
+	string_ operator += (const string_&str);
 };
