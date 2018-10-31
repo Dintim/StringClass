@@ -34,12 +34,12 @@ string_::string_(const string_ & obj)
 	strcpy_s(this->str, obj.length + 1, obj.str);
 }
 
-int string_::getLength()
+int string_::getLength()const
 {
 	return this->length;
 }
 
-const char * string_::getString()
+const char * string_::getString()const
 {
 	return this->str;
 }
@@ -138,4 +138,49 @@ string_ string_::operator+=(const string_ & obj)
 		this->setString(tmp);
 		return *this;
 	}	
+}
+
+string_ & string_::operator=(const string_ & str)
+{
+	if (this == &str) return *this;	
+	this->~string_();
+	this->str = new char[str.length + 1];
+	strcpy_s(this->str, str.length + 1, str.str);
+	this->length = str.length;
+	return *this;
+}
+
+string_::string_(string_ && str)
+{
+	this->str = str.str;
+	this->length = str.length;
+	str.str = nullptr;
+	str.length = 0;
+}
+
+string_ & string_::operator=(string_ && str)
+{
+	this->~string_();
+	this->str = str.str;
+	this->length = str.length;
+	str.str = nullptr;
+	str.length = 0;
+	return *this;
+}
+
+ostream & operator<<(ostream & os, const string_ & obj)
+{
+	for (size_t i = 0; i < obj.getLength(); i++)
+	{
+		os << *(obj.getString()+i);
+	}	
+	return os;
+}
+
+istream & operator>>(istream & is, string_ & obj)
+{
+	char tmp[1200];
+	is.getline(tmp, 1200);
+	obj.setString(tmp);
+	return is;
 }

@@ -5,13 +5,11 @@
 
 
 void main()
-{
+{	
 	
-
-	string_ s("hello");
-	string_ d(" world");
-	s += d;
-	s.print();
+	string_ s;
+	cin >> s;
+	cout << s;
 
 	system("pause");
 }
